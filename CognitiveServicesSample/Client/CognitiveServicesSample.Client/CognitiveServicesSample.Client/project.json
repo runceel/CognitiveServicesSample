@@ -1,0 +1,15 @@
+﻿{
+  "supports": {},
+  "dependencies": {
+    "Autofac": "4.6.0",
+    "Microsoft.NETCore.Portable.Compatibility": "1.0.1",
+    "NETStandard.Library": "1.6.1",
+    "Prism.Autofac.Forms": "6.3.0",
+    "Xamarin.Forms": "2.3.5.239-pre3"
+  },
+  "frameworks": {
+    "netstandard1.3": {
+      "imports": "portable-net45+uap"
+    }
+  }
+}
