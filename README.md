@@ -1,0 +1,2 @@
+# CognitiveServicesSample
+Microsoft Cognitive Servicesを使用したサンプルアプリケーションです。
