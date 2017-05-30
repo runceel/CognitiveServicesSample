@@ -11,5 +11,6 @@ namespace CognitiveServicesSample.Data
         Task InsertAsync(CategolizedImage data);
         Task<IEnumerable<Category>> GetCategoriesAsync();
         Task<bool> IsExistTweet(long id);
+        Task<int> CountImageByCategoryAsync(string category);
     }
 }

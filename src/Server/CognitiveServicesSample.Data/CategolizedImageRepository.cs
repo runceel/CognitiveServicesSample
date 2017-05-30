@@ -119,5 +119,14 @@ namespace CognitiveServicesSample.Data
                 .ToList()
                 .Count != 0;
         }
+
+        public async Task<int> CountImageByCategoryAsync(string category)
+        {
+            var client = await this.CreateClientAsync();
+            return client.CreateDocumentQuery<CategolizedImage>(
+                UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection))
+                .Where(x => x.Category == category)
+                .Count();
+        }
     }
 }
