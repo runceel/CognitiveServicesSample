@@ -128,7 +128,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Commons\CognitiveServicesSample.Commons\CognitiveServicesSample.Commons.csproj">
+      <Project>{c4f7a4e4-fe6e-4ce1-a94e-d908311f9bf5}</Project>
+      <Name>CognitiveServicesSample.Commons</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CognitiveServicesSample.Client\CognitiveServicesSample.Client.csproj">
+      <Project>{7410660f-a383-430c-af4b-f86efe7a0b87}</Project>
       <Name>CognitiveServicesSample.Client</Name>
     </ProjectReference>
   </ItemGroup>
