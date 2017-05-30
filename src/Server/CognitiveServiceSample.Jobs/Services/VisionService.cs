@@ -42,7 +42,7 @@ namespace CognitiveServiceSample.Jobs.Services
                     {
                         Image = image.image,
                         Category = x.Name,
-                        JaCategory = await this.TranslatorService.TranslateToJapaneseAsync(x.Name),
+                        JaCategory = await this.TranslatorService.TranslateToJapaneseAsync(x.Name.Replace("_", " ").Trim()),
                         TweetId = image.tweet.Id,
                         Text = image.tweet.Text,
                         Description = r.Description?.Captions.FirstOrDefault()?.Text,
