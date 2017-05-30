@@ -8,7 +8,7 @@ namespace CognitiveServicesSample.Data
     public class CategolizedImage
     {
         [JsonProperty("id")]
-        public string Id { get; set; }
+        public string Id { get; set; } = Guid.NewGuid().ToString();
         [JsonProperty("tweetId")]
         public long TweetId { get; set; }
         [JsonProperty("text")]
@@ -21,6 +21,8 @@ namespace CognitiveServicesSample.Data
         public string JaCategory { get; set; }
         [JsonProperty("description")]
         public string Description { get; set; }
+        [JsonProperty("jaDescription")]
+        public string JaDescription { get; set; }
         [JsonProperty("themeColor")]
         public string ThemeColor { get; set; }
     }
