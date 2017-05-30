@@ -14,7 +14,7 @@ namespace CognitiveServicesSample.Data
     {
         private const string DatabaseId = "db";
         private const string CategolizedImageCollection = "CategolizedImageCollection";
-        private const string CategoriesCollection = "CategoliesCollection";
+        private const string CategoriesCollection = "CategoriesCollection";
 
         private CosmosDbSetting CosmosDbSetting { get; }
         private ILogger Logger { get; }
@@ -32,12 +32,17 @@ namespace CognitiveServicesSample.Data
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
                 data);
             this.Logger.Info($"{nameof(CategolizedImageRepository)}.{nameof(InsertAsync)}({data.TweetId})");
-            if (client.CreateDocumentQuery<Category>(
+            var categories = client.CreateDocumentQuery<Category>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategoriesCollection),
-                new FeedOptions { MaxItemCount = -1 })
+                new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
                 .Where(x => x.PartitionKey == Category.PartitionKeyValue && x.Name == data.Category)
-                .ToList()
-                .Count == 0)
+                .ToList();
+            this.Logger.Info($"categories query result count: {categories.Count}");
+            foreach (var c in categories)
+            {
+                this.Logger.Info($"registered category: {c.Name} {c.PartitionKey}");
+            }
+            if (!categories.Any())
             {
                 this.Logger.Info($"{nameof(CategolizedImageRepository)}.{nameof(InsertAsync)}({data.TweetId}): Create category {data.Category}");
                 await client.CreateDocumentAsync(
@@ -64,7 +69,8 @@ namespace CognitiveServicesSample.Data
             var client = await this.CreateClientAsync();
             return client.CreateDocumentQuery<Category>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
-                new FeedOptions { EnableCrossPartitionQuery = true, MaxItemCount = -1 })
+                new FeedOptions { MaxItemCount = -1 })
+                .Where(x => x.PartitionKey == Category.PartitionKeyValue)
                 .ToList();
         }
 
