@@ -29,6 +29,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -104,6 +105,7 @@
       <HintPath>..\..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
     </Reference>
@@ -188,6 +190,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AnalyzeService.cs" />
+    <Compile Include="Services\AnalyzeSetting.cs" />
+    <Compile Include="Services\IAnalyzeService.cs" />
     <Compile Include="Services\ITranslatorService.cs" />
     <Compile Include="Services\ITwitterService.cs" />
     <Compile Include="Services\IVisionService.cs" />
