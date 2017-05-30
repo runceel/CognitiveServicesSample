@@ -1,4 +1,5 @@
-﻿using CoreTweet;
+﻿using CognitiveServicesSample.Commons;
+using CoreTweet;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,18 @@ namespace CognitiveServiceSample.Jobs.Services
     public class TwitterService : ITwitterService
     {
         private TwitterSetting TwitterSetting { get; }
+        private ILogger Logger { get; }
         private Tokens Tokens { get; set; }
 
-        public TwitterService(IOptions<TwitterSetting> twitterSetting)
+        public TwitterService(IOptions<TwitterSetting> twitterSetting, ILogger logger)
         {
             this.TwitterSetting = twitterSetting.Value;
+            this.Logger = logger;
         }
 
         public async Task InitializeAsync()
         {
+            this.Logger.Info($"{nameof(TwitterService)}.{nameof(InitializeAsync)}()");
             this.Tokens = Tokens.Create(
                 this.TwitterSetting.ConsumerKey,
                 this.TwitterSetting.ConsumerSecret,
@@ -30,8 +34,9 @@ namespace CognitiveServiceSample.Jobs.Services
 
         public async Task<IEnumerable<TwitterSearchResult>> SearchAsync(string filter)
         {
+            this.Logger.Info($"{nameof(TwitterService)}.{nameof(SearchAsync)}({filter})");
             var results = await this.Tokens.Search.TweetsAsync(
-                q => $"filter:images {filter} -RT");
+                q => $"filter:images {filter} -RT", count => 500);
             return results.Where(x => x.Entities.Media != null)
                 .Select(x => new TwitterSearchResult
                 {

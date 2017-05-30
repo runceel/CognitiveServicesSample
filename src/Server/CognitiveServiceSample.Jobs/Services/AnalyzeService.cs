@@ -1,4 +1,5 @@
-﻿using CognitiveServicesSample.Data;
+﻿using CognitiveServicesSample.Commons;
+using CognitiveServicesSample.Data;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,19 @@ namespace CognitiveServiceSample.Jobs.Services
         private ITwitterService TwitterService { get; }
         private IVisionService VisionService { get; }
         private ICategolizedImageRepository CategolizedImageRepository { get; }
+        private ILogger Logger { get; }
 
         public AnalyzeService(IOptions<AnalyzeSetting> analyzeSetting,
             ITwitterService twitterService,
             IVisionService visionService,
-            ICategolizedImageRepository categolizedImageRepository)
+            ICategolizedImageRepository categolizedImageRepository,
+            ILogger logger)
         {
             this.AnalyzeSetting = analyzeSetting.Value;
             this.TwitterService = twitterService;
             this.VisionService = visionService;
             this.CategolizedImageRepository = categolizedImageRepository;
+            this.Logger = logger;
         }
 
         public async Task AnalyzeAsync()
@@ -40,11 +44,12 @@ namespace CognitiveServiceSample.Jobs.Services
                 }
                 return r;
             }
-
+            this.Logger.Info($"{nameof(AnalyzeService)}.{nameof(AnalyzeAsync)} start");
             var searchResults = await this.TwitterService.SearchAsync(this.AnalyzeSetting.Keyword);
             var categolizedImages = await this.VisionService.CategolizedImageAsync(await FilterAsync(searchResults));
             var tasks = categolizedImages.Select(x => this.CategolizedImageRepository.InsertAsync(x)).ToArray();
             await Task.WhenAll(tasks);
+            this.Logger.Info($"{nameof(AnalyzeService)}.{nameof(AnalyzeAsync)} end");
         }
     }
 }

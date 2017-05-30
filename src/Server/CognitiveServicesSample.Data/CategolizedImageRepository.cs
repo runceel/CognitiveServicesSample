@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using System.Linq;
+using CognitiveServicesSample.Commons;
 
 namespace CognitiveServicesSample.Data
 {
@@ -16,10 +17,12 @@ namespace CognitiveServicesSample.Data
         private const string CategoriesCollection = "CategoliesCollection";
 
         private CosmosDbSetting CosmosDbSetting { get; }
+        private ILogger Logger { get; }
 
-        public CategolizedImageRepository(IOptions<CosmosDbSetting> cosmosDbSetting)
+        public CategolizedImageRepository(IOptions<CosmosDbSetting> cosmosDbSetting, ILogger logger)
         {
             this.CosmosDbSetting = cosmosDbSetting.Value;
+            this.Logger = logger;
         }
 
         public async Task InsertAsync(CategolizedImage data)
@@ -28,12 +31,15 @@ namespace CognitiveServicesSample.Data
             await client.CreateDocumentAsync(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
                 data);
-            if (!client.CreateDocumentQuery<Category>(
+            this.Logger.Info($"{nameof(CategolizedImageRepository)}.{nameof(InsertAsync)}({data.TweetId})");
+            if (client.CreateDocumentQuery<Category>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategoriesCollection),
                 new FeedOptions { MaxItemCount = -1 })
                 .Where(x => x.PartitionKey == Category.PartitionKeyValue && x.Name == data.Category)
-                .Any())
+                .ToList()
+                .Count == 0)
             {
+                this.Logger.Info($"{nameof(CategolizedImageRepository)}.{nameof(InsertAsync)}({data.TweetId}): Create category {data.Category}");
                 await client.CreateDocumentAsync(
                     UriFactory.CreateDocumentCollectionUri(DatabaseId, CategoriesCollection),
                     new Category { Name = data.Category, JaName = data.JaCategory });
@@ -104,7 +110,8 @@ namespace CognitiveServicesSample.Data
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
                 new FeedOptions { EnableCrossPartitionQuery = true })
                 .Where(x => x.TweetId == id)
-                .Any();
+                .ToList()
+                .Count != 0;
         }
     }
 }

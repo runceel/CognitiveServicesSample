@@ -1,0 +1,5 @@
+﻿http://ryuichi111std.hatenablog.com/entry/2017/03/23/205530
+
+func azure login
+func azure functionapp list
+func azure functionapp publish cogsample-functions

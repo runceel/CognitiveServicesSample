@@ -58,5 +58,11 @@
       <Version>10.0.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Commons\CognitiveServicesSample.Commons\CognitiveServicesSample.Commons.csproj">
+      <Project>{c4f7a4e4-fe6e-4ce1-a94e-d908311f9bf5}</Project>
+      <Name>CognitiveServicesSample.Commons</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

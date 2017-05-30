@@ -1,0 +1,13 @@
+{
+  "disabled": false,
+  "scriptFile": "..\\bin\\CognitiveServiceSample.Functions.dll",
+  "entryPoint": "CognitiveServiceSample.Functions.AnalyzeFunctions.Run",
+  "bindings": [
+    {
+      "name": "myTimer",
+      "type": "timerTrigger",
+      "direction": "in",
+      "schedule": "0 */5 * * * *"
+    }
+  ]
+}

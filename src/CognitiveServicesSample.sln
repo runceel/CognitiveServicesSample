@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CognitiveServicesSample.Com
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{F8C5F8C3-9F37-40C0-ADCF-8E1377CDF0AF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servier", "Servier", "{A30B288A-6C38-482B-90F9-22ACD997B9A7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{A30B288A-6C38-482B-90F9-22ACD997B9A7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CognitiveServicesSample.Server", "Server\CognitiveServicesSample.Server\CognitiveServicesSample.Server.csproj", "{6698C65E-D762-4F58-A03E-B430054AC281}"
 EndProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServicesSample.Client.UWP", "Client\CognitiveServicesSample.Client.UWP\CognitiveServicesSample.Client.UWP.csproj", "{8F624F2B-5E9D-4364-91B5-4571B533D5C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServicesSample.Data", "Server\CognitiveServicesSample.Data\CognitiveServicesSample.Data.csproj", "{4588BCCA-82E2-41D3-9DAB-9D9A0C0C162B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServiceSample.Functions", "Server\CognitiveServiceSample.Functions\CognitiveServiceSample.Functions.csproj", "{03E26C13-9B7C-4697-97B1-22BB42365B40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -457,6 +459,54 @@ Global
 		{4588BCCA-82E2-41D3-9DAB-9D9A0C0C162B}.Release|x64.Build.0 = Release|Any CPU
 		{4588BCCA-82E2-41D3-9DAB-9D9A0C0C162B}.Release|x86.ActiveCfg = Release|Any CPU
 		{4588BCCA-82E2-41D3-9DAB-9D9A0C0C162B}.Release|x86.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|Any CPU.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|Any CPU.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|ARM.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|ARM.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|iPhone.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|iPhone.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|iPhoneSimulator.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|x64.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|x64.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|x86.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Ad-Hoc|x86.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|Any CPU.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|Any CPU.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|ARM.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|ARM.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|iPhone.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|iPhone.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|iPhoneSimulator.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|x64.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|x64.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|x86.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.AppStore|x86.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|ARM.Build.0 = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|x64.Build.0 = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Debug|x86.Build.0 = Debug|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|ARM.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|ARM.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|iPhone.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|x64.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|x64.Build.0 = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|x86.ActiveCfg = Release|Any CPU
+		{03E26C13-9B7C-4697-97B1-22BB42365B40}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -470,5 +520,6 @@ Global
 		{197B6F04-4009-4323-8456-3C6B5126387F} = {F8C5F8C3-9F37-40C0-ADCF-8E1377CDF0AF}
 		{8F624F2B-5E9D-4364-91B5-4571B533D5C4} = {F8C5F8C3-9F37-40C0-ADCF-8E1377CDF0AF}
 		{4588BCCA-82E2-41D3-9DAB-9D9A0C0C162B} = {A30B288A-6C38-482B-90F9-22ACD997B9A7}
+		{03E26C13-9B7C-4697-97B1-22BB42365B40} = {A30B288A-6C38-482B-90F9-22ACD997B9A7}
 	EndGlobalSection
 EndGlobal

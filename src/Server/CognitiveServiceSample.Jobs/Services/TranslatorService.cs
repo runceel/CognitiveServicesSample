@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using CognitiveServicesSample.Commons;
+using Microsoft.Extensions.Options;
 using Microsoft.Translator.API;
 using System;
 using System.Collections.Generic;
@@ -14,14 +15,17 @@ namespace CognitiveServiceSample.Jobs.Services
     public class TranslatorService : ITranslatorService
     {
         private AzureAuthToken AzureAuthToken { get; }
+        private ILogger Logger { get; }
 
-        public TranslatorService(IOptions<TranslatorSetting> translatorSetting)
+        public TranslatorService(IOptions<TranslatorSetting> translatorSetting, ILogger logger)
         {
             this.AzureAuthToken = new AzureAuthToken(translatorSetting.Value.APIKey);
+            this.Logger = logger;
         }
 
         public async Task<string> TranslateToJapaneseAsync(string en)
         {
+            this.Logger.Info($"{nameof(TranslatorService)}.{nameof(TranslateToJapaneseAsync)}({en})");
             if (string.IsNullOrWhiteSpace(en))
             {
                 return "";

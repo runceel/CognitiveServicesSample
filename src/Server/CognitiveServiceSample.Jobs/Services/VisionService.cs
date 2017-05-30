@@ -7,6 +7,7 @@ using CognitiveServicesSample.Data;
 using Microsoft.ProjectOxford.Vision;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
+using CognitiveServicesSample.Commons;
 
 namespace CognitiveServiceSample.Jobs.Services
 {
@@ -14,17 +15,20 @@ namespace CognitiveServiceSample.Jobs.Services
     {
         private IVisionServiceClient VisionServiceClient { get; }
         private ITranslatorService TranslatorService { get; }
+        private ILogger Logger { get; }
 
-        public VisionService(IOptions<VisionSetting> visionSetting, ITranslatorService translatorService)
+        public VisionService(IOptions<VisionSetting> visionSetting, ITranslatorService translatorService, ILogger logger)
         {
             this.VisionServiceClient = new VisionServiceClient(
                 visionSetting.Value.APIKey,
                 visionSetting.Value.Endpoint);
             this.TranslatorService = translatorService;
+            this.Logger = logger;
         }
 
         public async Task<IEnumerable<CategolizedImage>> CategolizedImageAsync(IEnumerable<TwitterSearchResult> tweets)
         {
+            this.Logger.Info($"{nameof(VisionService)}.{nameof(CategolizedImageAsync)}(tweets.count = {tweets.Count()})");
             var images = tweets.SelectMany(x => x.Images.Select(y => (image: y, tweet: x)));
             var results = new List<CategolizedImage>();
             foreach (var image in images)
@@ -54,7 +58,7 @@ namespace CognitiveServiceSample.Jobs.Services
                 }
                 catch (TaskCanceledException ex)
                 {
-                    Debug.WriteLine(ex);
+                    this.Logger.Error($"Error: {nameof(VisionService)}.{nameof(CategolizedImageAsync)}(tweets.count = {tweets.Count()}): {ex}");
                 }
                 // 10 call / 1sec
                 await Task.Delay(110);
