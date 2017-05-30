@@ -225,7 +225,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CognitiveServicesSample.Data\CognitiveServicesSample.Data.csproj">
-      <Project>{3e87f814-4018-4717-ade6-36e8186bd658}</Project>
+      <Project>{4588bcca-82e2-41d3-9dab-9d9a0c0c162b}</Project>
       <Name>CognitiveServicesSample.Data</Name>
     </ProjectReference>
   </ItemGroup>

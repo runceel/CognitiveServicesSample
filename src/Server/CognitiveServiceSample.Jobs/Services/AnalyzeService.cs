@@ -28,8 +28,21 @@ namespace CognitiveServiceSample.Jobs.Services
 
         public async Task AnalyzeAsync()
         {
+            async Task<IEnumerable<TwitterSearchResult>> FilterAsync(IEnumerable<TwitterSearchResult> tweets)
+            {
+                var r = new List<TwitterSearchResult>();
+                foreach (var tweet in tweets)
+                {
+                    if (!await this.CategolizedImageRepository.IsExistTweet(tweet.Id))
+                    {
+                        r.Add(tweet);
+                    }
+                }
+                return r;
+            }
+
             var searchResults = await this.TwitterService.SearchAsync(this.AnalyzeSetting.Keyword);
-            var categolizedImages = await this.VisionService.CategolizedImageAsync(searchResults);
+            var categolizedImages = await this.VisionService.CategolizedImageAsync(await FilterAsync(searchResults));
             var tasks = categolizedImages.Select(x => this.CategolizedImageRepository.InsertAsync(x)).ToArray();
             await Task.WhenAll(tasks);
         }

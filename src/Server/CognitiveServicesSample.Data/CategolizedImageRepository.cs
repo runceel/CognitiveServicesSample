@@ -96,5 +96,15 @@ namespace CognitiveServicesSample.Data
 
             return client;
         }
+
+        public async Task<bool> IsExistTweet(long id)
+        {
+            var client = await this.CreateClientAsync();
+            return client.CreateDocumentQuery<CategolizedImage>(
+                UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
+                new FeedOptions { EnableCrossPartitionQuery = true })
+                .Where(x => x.TweetId == id)
+                .Any();
+        }
     }
 }
