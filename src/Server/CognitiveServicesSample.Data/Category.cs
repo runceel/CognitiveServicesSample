@@ -9,11 +9,11 @@ namespace CognitiveServicesSample.Data
     {
         public const string PartitionKeyValue = "category";
 
-        [JsonProperty("id")]
+        [JsonProperty(PropertyName = "id")]
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public string Name { get; set; }
         public string JaName { get; set; }
-        [JsonProperty("partitionKey")]
+        [JsonProperty(PropertyName = "partitionKey")]
         public string PartitionKey { get; set; } = PartitionKeyValue;
     }
 }

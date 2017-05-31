@@ -41,6 +41,11 @@ namespace CognitiveServiceSample.Jobs.Services
                         VisualFeature.Description,
                         VisualFeature.Categories,
                     });
+                    if (r.Categories == null)
+                    {
+                        continue;
+                    }
+
                     var jpCaption = await this.TranslatorService.TranslateToJapaneseAsync(r.Description?.Captions.FirstOrDefault()?.Text ?? "");
                     var tasks = r.Categories.Select(async x => new CategolizedImage
                     {

@@ -47,8 +47,10 @@ namespace CognitiveServiceSample.Jobs.Services
             this.Logger.Info($"{nameof(AnalyzeService)}.{nameof(AnalyzeAsync)} start");
             var searchResults = await this.TwitterService.SearchAsync(this.AnalyzeSetting.Keyword);
             var categolizedImages = await this.VisionService.CategolizedImageAsync(await FilterAsync(searchResults));
-            var tasks = categolizedImages.Select(x => this.CategolizedImageRepository.InsertAsync(x)).ToArray();
-            await Task.WhenAll(tasks);
+            foreach (var categolizedImage in categolizedImages)
+            {
+                await this.CategolizedImageRepository.InsertAsync(categolizedImage);
+            }
             this.Logger.Info($"{nameof(AnalyzeService)}.{nameof(AnalyzeAsync)} end");
         }
     }
