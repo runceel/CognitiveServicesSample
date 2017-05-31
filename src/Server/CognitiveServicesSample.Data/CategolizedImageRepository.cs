@@ -7,6 +7,7 @@ using Microsoft.Azure.Documents;
 using Microsoft.Azure.Documents.Client;
 using System.Linq;
 using CognitiveServicesSample.Commons;
+using Microsoft.Azure.Documents.Linq;
 
 namespace CognitiveServicesSample.Data
 {
@@ -32,17 +33,13 @@ namespace CognitiveServicesSample.Data
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
                 data);
             this.Logger.Info($"{nameof(CategolizedImageRepository)}.{nameof(InsertAsync)}({data.TweetId})");
-            var categories = client.CreateDocumentQuery<Category>(
+            var categoriesCount = await client.CreateDocumentQuery<Category>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategoriesCollection),
                 new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
                 .Where(x => x.PartitionKey == Category.PartitionKeyValue && x.Name == data.Category)
-                .ToList();
-            this.Logger.Info($"categories query result count: {categories.Count}");
-            foreach (var c in categories)
-            {
-                this.Logger.Info($"registered category: {c.Name} {c.PartitionKey}");
-            }
-            if (!categories.Any())
+                .CountAsync();
+            this.Logger.Info($"categories query result count: {categoriesCount}");
+            if (categoriesCount == 0)
             {
                 this.Logger.Info($"{nameof(CategolizedImageRepository)}.{nameof(InsertAsync)}({data.TweetId}): Create category {data.Category}");
                 await client.CreateDocumentAsync(
@@ -54,24 +51,36 @@ namespace CognitiveServicesSample.Data
         public async Task<IEnumerable<CategolizedImage>> LoadAsync(int skip, int pageSize, string category)
         {
             var client = await this.CreateClientAsync();
-            return client.CreateDocumentQuery<CategolizedImage>(
+            var query = client.CreateDocumentQuery<CategolizedImage>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
                 new FeedOptions { MaxItemCount = -1 })
                 .Where(x => x.Category == category)
                 .OrderBy(x => x.TweetId)
                 .Skip(skip)
                 .Take(pageSize)
-                .ToList();
+                .AsDocumentQuery();
+            var r = new List<CategolizedImage>();
+            while (query.HasMoreResults)
+            {
+                r.AddRange((await query.ExecuteNextAsync<CategolizedImage>()).ToList());
+            }
+            return r.AsEnumerable();
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             var client = await this.CreateClientAsync();
-            return client.CreateDocumentQuery<Category>(
+            var query = client.CreateDocumentQuery<Category>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
                 new FeedOptions { MaxItemCount = -1 })
                 .Where(x => x.PartitionKey == Category.PartitionKeyValue)
-                .ToList();
+                .AsDocumentQuery();
+            var r = new List<Category>();
+            while (query.HasMoreResults)
+            {
+                r.AddRange((await query.ExecuteNextAsync<Category>()).ToList());
+            }
+            return r.AsEnumerable();
         }
 
         private async Task<DocumentClient> CreateClientAsync()
@@ -112,21 +121,20 @@ namespace CognitiveServicesSample.Data
         public async Task<bool> IsExistTweet(long id)
         {
             var client = await this.CreateClientAsync();
-            return client.CreateDocumentQuery<CategolizedImage>(
+            return (await client.CreateDocumentQuery<CategolizedImage>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
                 new FeedOptions { EnableCrossPartitionQuery = true })
                 .Where(x => x.TweetId == id)
-                .ToList()
-                .Count != 0;
+                .CountAsync()) != 0;
         }
 
         public async Task<int> CountImageByCategoryAsync(string category)
         {
             var client = await this.CreateClientAsync();
-            return client.CreateDocumentQuery<CategolizedImage>(
+            return await client.CreateDocumentQuery<CategolizedImage>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection))
                 .Where(x => x.Category == category)
-                .Count();
+                .CountAsync();
         }
     }
 }
