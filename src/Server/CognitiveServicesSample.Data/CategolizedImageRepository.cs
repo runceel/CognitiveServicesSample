@@ -71,15 +71,16 @@ namespace CognitiveServicesSample.Data
         {
             var client = await this.CreateClientAsync();
             var query = client.CreateDocumentQuery<Category>(
-                UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
+                UriFactory.CreateDocumentCollectionUri(DatabaseId, CategoriesCollection),
                 new FeedOptions { MaxItemCount = -1 })
                 .Where(x => x.PartitionKey == Category.PartitionKeyValue)
                 .AsDocumentQuery();
             var r = new List<Category>();
-            while (query.HasMoreResults)
+            do
             {
                 r.AddRange((await query.ExecuteNextAsync<Category>()).ToList());
             }
+            while (query.HasMoreResults);
             return r.AsEnumerable();
         }
 

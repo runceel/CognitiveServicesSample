@@ -7,7 +7,7 @@ namespace CognitiveServicesSample.Commons
     public class Category
     {
         public string Name { get; set; }
-        public string JpName { get; set; }
+        public string JaName { get; set; }
         public int ImageCount { get; set; }
     }
 }
