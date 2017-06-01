@@ -3,6 +3,8 @@ using Prism.Autofac;
 using Prism.Autofac.Forms;
 using CognitiveServicesSample.Client.Views;
 using Xamarin.Forms;
+using System.Net.Http;
+using CognitiveServicesSample.Client.Services;
 
 namespace CognitiveServicesSample.Client
 {
@@ -10,17 +12,23 @@ namespace CognitiveServicesSample.Client
     {
         public App(IPlatformInitializer initializer = null) : base(initializer) { }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            NavigationService.NavigateAsync("NavigationPage/MainPage?title=Hello%20from%20Xamarin.Forms");
+            await this.NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes()
         {
-            Container.RegisterTypeForNavigation<NavigationPage>();
-            Container.RegisterTypeForNavigation<MainPage>();
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(new HttpClient());
+            builder.RegisterType<CategoryService>().As<ICategoryService>().SingleInstance();
+
+            builder.Update(this.Container);
+
+            this.Container.RegisterTypeForNavigation<NavigationPage>();
+            this.Container.RegisterTypeForNavigation<MainPage>();
         }
     }
 }
