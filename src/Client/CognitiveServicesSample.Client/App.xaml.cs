@@ -16,7 +16,7 @@ namespace CognitiveServicesSample.Client
         {
             this.InitializeComponent();
 
-            await this.NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await this.NavigationService.NavigateAsync("/AppNavigationPage/MainPage");
         }
 
         protected override void RegisterTypes()
@@ -27,8 +27,8 @@ namespace CognitiveServicesSample.Client
 
             builder.Update(this.Container);
 
-            this.Container.RegisterTypeForNavigation<NavigationPage>();
             this.Container.RegisterTypeForNavigation<MainPage>();
+            this.Container.RegisterTypeForNavigation<AppNavigationPage>();
         }
     }
 }
