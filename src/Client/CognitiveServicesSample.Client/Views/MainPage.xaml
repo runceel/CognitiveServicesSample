@@ -2,11 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:Behaviors="clr-namespace:CognitiveServicesSample.Client.Behaviors"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CognitiveServicesSample.Client.Views.MainPage"
              Title="#microsoft images library">
     <Grid>
         <ListView ItemsSource="{Binding Categories}">
+            <ListView.Behaviors>
+                <Behaviors:NoSelectedListViewBehavior />
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding JaName}" 
