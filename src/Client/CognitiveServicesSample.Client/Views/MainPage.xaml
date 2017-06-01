@@ -5,7 +5,7 @@
              xmlns:Behaviors="clr-namespace:CognitiveServicesSample.Client.Behaviors"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CognitiveServicesSample.Client.Views.MainPage"
-             Title="#microsoft images library">
+             Title="#microsoft image library">
     <Grid>
         <ListView ItemsSource="{Binding Categories}">
             <ListView.Behaviors>
@@ -15,7 +15,7 @@
                 <DataTemplate>
                     <TextCell Text="{Binding JaName}" 
                               TextColor="{StaticResource PrimaryColor}"
-                              Detail="{Binding Name}"
+                              Detail="{Binding ImageCount, StringFormat='{0}枚の画像があります'}"
                               DetailColor="{StaticResource SecondaryColor}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
