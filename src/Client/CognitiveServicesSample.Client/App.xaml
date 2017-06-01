@@ -3,5 +3,13 @@
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                         xmlns:prism="clr-namespace:Prism.Autofac;assembly=Prism.Autofac.Forms"
                         x:Class="CognitiveServicesSample.Client.App">
-
+  <prism:PrismApplication.Resources>
+    <ResourceDictionary>
+      <Color x:Key="PrimaryColor">#7F0000</Color>
+      <Color x:Key="SecondaryColor">#FF4C4C</Color>
+      <Color x:Key="OptionColor1">#FF0000</Color>
+      <Color x:Key="OptionColor2">#7F2626</Color>
+      <Color x:Key="OptionColor3">#CC0000</Color>
+    </ResourceDictionary>
+  </prism:PrismApplication.Resources>
 </prism:PrismApplication>

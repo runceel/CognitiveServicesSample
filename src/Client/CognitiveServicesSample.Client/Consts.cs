@@ -8,6 +8,6 @@ namespace CognitiveServicesSample.Client
 {
     static class Consts
     {
-        public static string ApiEndpoint { get; } = "http://YOURWEBSITE.azurewebsites.net";
+        public static string ApiEndpoint { get; } = "http://cogsample.azurewebsites.net";
     }
 }

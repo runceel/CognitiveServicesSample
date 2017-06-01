@@ -4,8 +4,25 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CognitiveServicesSample.Client.Views.MainPage"
-             Title="MainPage">
-  <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-    <Label Text="{Binding Title}" />
-  </StackLayout>
+             Title="#microsoft images library">
+    <Grid>
+        <ListView ItemsSource="{Binding Categories}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding JaName}" 
+                              TextColor="{StaticResource PrimaryColor}"
+                              Detail="{Binding Name}"
+                              DetailColor="{StaticResource SecondaryColor}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Frame IsVisible="{Binding IsBusy}" 
+               Opacity="0.3"
+               BackgroundColor="LightGray" />
+        <Frame IsVisible="{Binding IsBusy}"
+               BackgroundColor="Transparent">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               VerticalOptions="Center" />
+        </Frame>
+    </Grid>
 </ContentPage>
