@@ -36,7 +36,7 @@ namespace CognitiveServicesSample.Data
             var categoriesCount = await client.CreateDocumentQuery<Category>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategoriesCollection),
                 new FeedOptions { MaxItemCount = -1, EnableCrossPartitionQuery = true })
-                .Where(x => x.PartitionKey == Category.PartitionKeyValue && x.Name == data.Category)
+                .Where(x => x.Name == data.Category)
                 .CountAsync();
             this.Logger.Info($"categories query result count: {categoriesCount}");
             if (categoriesCount == 0)
