@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:Behaviors="clr-namespace:CognitiveServicesSample.Client.Behaviors"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="CognitiveServicesSample.Client.Views.CategolizedImagePage"
+             Title="{Binding JaCategory, StringFormat='{0} images'}">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <Grid>
+        <ListView ItemsSource="{Binding CategolizedImages}"
+                  ItemTapped="ListView_ItemTapped">
+            <ListView.Behaviors>
+                <Behaviors:NoSelectedListViewBehavior />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Source="{Binding Image}"
+                                   Aspect="AspectFit"
+                                   Grid.RowSpan="2" 
+                                   WidthRequest="50" 
+                                   VerticalOptions="Center"
+                                   Margin="5"/>
+
+                            <Label Text="{Binding Text}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   FontSize="Medium"
+                                   TextColor="{StaticResource PrimaryColor}" 
+                                   Margin="2.5" />
+
+                            <Label Text="{Binding JaDescription}"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontSize="Small"
+                                   TextColor="{StaticResource SecondaryColor}" 
+                                   Margin="2.5"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Frame x:Name="frameTappedCategolizedImageHost"
+               IsVisible="False"
+               HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand">
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer Tapped="PreviewClosed" />
+            </Frame.GestureRecognizers>
+            <Grid>
+                <Frame BackgroundColor="White" />
+                <StackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center">
+                    <Label x:Name="labelJaDescription"
+                           FontSize="Medium"
+                           TextColor="{StaticResource PrimaryColor}" />
+                    <Image x:Name="imagePreview"
+                           Aspect="AspectFit" />
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <Frame IsVisible="{Binding IsBusy}"
+               Opacity="0.3"
+               BackgroundColor="LightGray" />
+        <Frame IsVisible="{Binding IsBusy}"
+               BackgroundColor="Transparent">
+            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                               VerticalOptions="Center" />
+        </Frame>
+    </Grid>
+</ContentPage>

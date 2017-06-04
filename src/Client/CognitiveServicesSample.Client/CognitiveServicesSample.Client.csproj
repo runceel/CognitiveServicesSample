@@ -42,6 +42,7 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ICategoryService.cs" />
     <Compile Include="ViewModels\AppNavigationPageViewModel.cs" />
+    <Compile Include="ViewModels\CategolizedImagePageViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +62,9 @@
     <Compile Include="Views\AppNavigationPage.xaml.cs">
       <DependentUpon>AppNavigationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CategolizedImagePage.xaml.cs">
+      <DependentUpon>CategolizedImagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -76,6 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\AppNavigationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\CategolizedImagePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

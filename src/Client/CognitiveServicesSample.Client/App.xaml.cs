@@ -29,6 +29,7 @@ namespace CognitiveServicesSample.Client
 
             this.Container.RegisterTypeForNavigation<MainPage>();
             this.Container.RegisterTypeForNavigation<AppNavigationPage>();
+            Container.RegisterTypeForNavigation<CategolizedImagePage>();
         }
     }
 }

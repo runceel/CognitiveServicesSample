@@ -16,6 +16,7 @@ namespace CognitiveServicesSample.Client.ViewModels
     {
         private ICategoryService CategoryService { get; }
         private IPageDialogService PageDialogService { get; }
+        private INavigationService NavigationService { get; }
 
         private bool isBusy;
 
@@ -35,13 +36,18 @@ namespace CognitiveServicesSample.Client.ViewModels
 
         public DelegateCommand LoadCategoriesCommand { get; }
 
+        public DelegateCommand<Category> TapCategoryCommand { get; }
+
         public MainPageViewModel(ICategoryService categoryService,
-            IPageDialogService pageDialogService)
+            IPageDialogService pageDialogService,
+            INavigationService navigationService)
         {
             this.CategoryService = categoryService;
             this.PageDialogService = pageDialogService;
+            this.NavigationService = navigationService;
 
             this.LoadCategoriesCommand = new DelegateCommand(async () => await this.LoadCategoriesExecuteAsync());
+            this.TapCategoryCommand = new DelegateCommand<Category>(async category => await this.TapCategoryExecuteAsync(category));
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -80,6 +86,16 @@ namespace CognitiveServicesSample.Client.ViewModels
             {
                 this.IsBusy = false;
             }
+        }
+
+        private async Task TapCategoryExecuteAsync(Category category)
+        {
+            await this.NavigationService.NavigateAsync("CategolizedImagePage",
+                new NavigationParameters
+                {
+                    { "category", category.Name },
+                    { "jaCategory", category.JaName },
+                });
         }
 
     }

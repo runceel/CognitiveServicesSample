@@ -3,13 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:Behaviors="clr-namespace:CognitiveServicesSample.Client.Behaviors"
+             xmlns:PrismBehaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CognitiveServicesSample.Client.Views.MainPage"
              Title="#microsoft image library">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <On Platform="iOS">0,20,0,0</On>
+        </OnPlatform>
+    </ContentPage.Padding>
     <Grid>
         <ListView ItemsSource="{Binding Categories}">
             <ListView.Behaviors>
                 <Behaviors:NoSelectedListViewBehavior />
+                <PrismBehaviors:EventToCommandBehavior EventName="ItemTapped"
+                                                       Command="{Binding TapCategoryCommand}"
+                                                       EventArgsParameterPath="Item" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
