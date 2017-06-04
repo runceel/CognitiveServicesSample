@@ -48,23 +48,21 @@ namespace CognitiveServicesSample.Data
             }
         }
 
-        public async Task<IEnumerable<CategolizedImage>> LoadAsync(int skip, int pageSize, string category)
+        public async Task<CategolizedImageLoadResponse> LoadAsync(string category, string continuation)
         {
             var client = await this.CreateClientAsync();
             var query = client.CreateDocumentQuery<CategolizedImage>(
                 UriFactory.CreateDocumentCollectionUri(DatabaseId, CategolizedImageCollection),
-                new FeedOptions { MaxItemCount = -1 })
+                new FeedOptions { MaxItemCount = 50, RequestContinuation = continuation })
                 .Where(x => x.Category == category)
                 .OrderBy(x => x.TweetId)
-                .Skip(skip)
-                .Take(pageSize)
                 .AsDocumentQuery();
-            var r = new List<CategolizedImage>();
-            while (query.HasMoreResults)
+            var r = await query.ExecuteNextAsync<CategolizedImage>();
+            return new CategolizedImageLoadResponse
             {
-                r.AddRange((await query.ExecuteNextAsync<CategolizedImage>()).ToList());
-            }
-            return r.AsEnumerable();
+                Image = r.ToList(),
+                Continues = r.ResponseContinuation,
+            };
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync()

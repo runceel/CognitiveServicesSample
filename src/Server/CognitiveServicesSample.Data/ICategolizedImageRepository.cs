@@ -7,7 +7,7 @@ namespace CognitiveServicesSample.Data
 {
     public interface ICategolizedImageRepository
     {
-        Task<IEnumerable<CategolizedImage>> LoadAsync(int skip, int pageSize, string category);
+        Task<CategolizedImageLoadResponse> LoadAsync(string category, string continuation);
         Task InsertAsync(CategolizedImage data);
         Task<IEnumerable<Category>> GetCategoriesAsync();
         Task<bool> IsExistTweet(long id);

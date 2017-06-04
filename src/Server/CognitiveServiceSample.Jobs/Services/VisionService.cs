@@ -26,11 +26,11 @@ namespace CognitiveServiceSample.Jobs.Services
             this.Logger = logger;
         }
 
-        public async Task<IEnumerable<CategolizedImage>> CategolizedImageAsync(IEnumerable<TwitterSearchResult> tweets)
+        public async Task<IEnumerable<CognitiveServicesSample.Data.CategolizedImage>> CategolizedImageAsync(IEnumerable<TwitterSearchResult> tweets)
         {
             this.Logger.Info($"{nameof(VisionService)}.{nameof(CategolizedImageAsync)}(tweets.count = {tweets.Count()})");
             var images = tweets.SelectMany(x => x.Images.Select(y => (image: y, tweet: x)));
-            var results = new List<CategolizedImage>();
+            var results = new List<CognitiveServicesSample.Data.CategolizedImage>();
             foreach (var image in images)
             {
                 try
@@ -47,7 +47,7 @@ namespace CognitiveServiceSample.Jobs.Services
                     }
 
                     var jpCaption = await this.TranslatorService.TranslateToJapaneseAsync(r.Description?.Captions.FirstOrDefault()?.Text ?? "");
-                    var tasks = r.Categories.Select(async x => new CategolizedImage
+                    var tasks = r.Categories.Select(async x => new CognitiveServicesSample.Data.CategolizedImage
                     {
                         Image = image.image,
                         Category = x.Name,

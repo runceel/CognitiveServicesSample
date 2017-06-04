@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategolizedImage.cs" />
+    <Compile Include="CategolizedImageLoadResponse.cs" />
     <Compile Include="CategolizedImageRepository.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CosmosDbSetting.cs" />
@@ -56,6 +57,9 @@
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>9.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.3.1</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
