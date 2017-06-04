@@ -21,6 +21,8 @@ namespace CognitiveServicesSample.Client.ViewModels
         private string Continuation { get; set; }
         public ObservableCollection<CategolizedImage> CategolizedImages { get; } = new ObservableCollection<CategolizedImage>();
 
+        private bool IsFirstLoadingRequest { get; set; } = true;
+
         private bool isBusy;
 
         public bool IsBusy
@@ -74,11 +76,14 @@ namespace CognitiveServicesSample.Client.ViewModels
             this.IsBusy = true;
             try
             {
-                var res = await this.CategoryService.LoadCategolizedImagesAsync(this.Category, this.Continuation);
-                this.Continuation = res.Continuation;
-                foreach (var r in res.CategolizedImages)
+                if (this.IsLoadMore())
                 {
-                    this.CategolizedImages.Add(r);
+                    var res = await this.CategoryService.LoadCategolizedImagesAsync(this.Category, this.Continuation);
+                    this.Continuation = res.Continuation;
+                    foreach (var r in res.CategolizedImages)
+                    {
+                        this.CategolizedImages.Add(r);
+                    }
                 }
             }
             catch (Exception ex)
@@ -90,6 +95,17 @@ namespace CognitiveServicesSample.Client.ViewModels
             {
                 this.IsBusy = false;
             }
+        }
+
+        private bool IsLoadMore()
+        {
+            if (this.IsFirstLoadingRequest)
+            {
+                this.IsFirstLoadingRequest = false;
+                return true;
+            }
+
+            return !string.IsNullOrWhiteSpace(this.Continuation);
         }
     }
 }

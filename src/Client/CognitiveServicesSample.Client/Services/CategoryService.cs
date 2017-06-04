@@ -28,7 +28,7 @@ namespace CognitiveServicesSample.Client.Services
 
         public async Task<CategolizedImageResponse> LoadCategolizedImagesAsync(string category, string continuation)
         {
-            var res = await this.Client.GetAsync($"{Consts.ApiEndpoint}/api/CategolizedImage?category={category}{this.CreateContinuationParameter(continuation)}");
+            var res = await this.Client.GetAsync($"{Consts.ApiEndpoint}/api/CategolizedImage?category={Uri.EscapeDataString(category)}{this.CreateContinuationParameter(continuation)}");
             res.EnsureSuccessStatusCode();
 
             return JsonConvert.DeserializeObject<CategolizedImageResponse>(await res.Content.ReadAsStringAsync());
@@ -41,7 +41,7 @@ namespace CognitiveServicesSample.Client.Services
                 return "";
             }
 
-            return $"&continuation={continuation}";
+            return $"&continuation={Uri.EscapeDataString(continuation)}";
         }
     }
 }

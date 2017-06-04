@@ -1,4 +1,5 @@
-﻿using CognitiveServicesSample.Data;
+﻿using CognitiveServicesSample.Commons;
+using CognitiveServicesSample.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,18 @@ namespace CognitiveServicesSample.Web.Controllers
     public class CategolizedImageController : ApiController
     {
         private ICategolizedImageRepository CategolizedImageRepository { get; }
+        private ILogger Logger { get; }
 
-        public CategolizedImageController(ICategolizedImageRepository categolizedImageRepository)
+        public CategolizedImageController(ICategolizedImageRepository categolizedImageRepository, ILogger logger)
         {
             this.CategolizedImageRepository = categolizedImageRepository;
+            this.Logger = logger;
         }
 
         public async Task<IHttpActionResult> Get(string category, string continuation = null)
         {
+            this.Logger.Info($"{nameof(CategolizedImageController)}.{nameof(Get)}({category}, {continuation})");
+
             var r = await this.CategolizedImageRepository.LoadAsync(category, continuation);
             return Ok(new Commons.CategolizedImageResponse
             {

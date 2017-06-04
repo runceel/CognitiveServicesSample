@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:Behaviors="clr-namespace:CognitiveServicesSample.Client.Behaviors"
+             xmlns:Controls="clr-namespace:CognitiveServicesSample.Client.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CognitiveServicesSample.Client.Views.CategolizedImagePage"
              Title="{Binding JaCategory, StringFormat='{0} images'}">
@@ -12,8 +13,9 @@
         </OnPlatform>
     </ContentPage.Padding>
     <Grid>
-        <ListView ItemsSource="{Binding CategolizedImages}"
-                  ItemTapped="ListView_ItemTapped">
+        <Controls:IncrementalLoadingListView ItemsSource="{Binding CategolizedImages}"
+                                             ItemTapped="ListView_ItemTapped"
+                                             LoadMoreCommand="{Binding LoadCategolizedImagesCommand}">
             <ListView.Behaviors>
                 <Behaviors:NoSelectedListViewBehavior />
             </ListView.Behaviors>
@@ -32,29 +34,29 @@
 
                             <Image Source="{Binding Image}"
                                    Aspect="AspectFit"
-                                   Grid.RowSpan="2" 
-                                   WidthRequest="50" 
+                                   Grid.RowSpan="2"
+                                   WidthRequest="50"
                                    VerticalOptions="Center"
-                                   Margin="5"/>
+                                   Margin="5" />
 
                             <Label Text="{Binding Text}"
                                    Grid.Row="0"
                                    Grid.Column="1"
                                    FontSize="Medium"
-                                   TextColor="{StaticResource PrimaryColor}" 
+                                   TextColor="{StaticResource PrimaryColor}"
                                    Margin="2.5" />
 
                             <Label Text="{Binding JaDescription}"
                                    Grid.Row="1"
                                    Grid.Column="1"
                                    FontSize="Small"
-                                   TextColor="{StaticResource SecondaryColor}" 
-                                   Margin="2.5"/>
+                                   TextColor="{StaticResource SecondaryColor}"
+                                   Margin="2.5" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </Controls:IncrementalLoadingListView>
         <Frame x:Name="frameTappedCategolizedImageHost"
                IsVisible="False"
                HorizontalOptions="FillAndExpand"
