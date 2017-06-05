@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Autofac;
 using Prism.Autofac.Forms;
+using FFImageLoading.Forms.Droid;
 
 namespace CognitiveServicesSample.Client.Droid
 {
@@ -21,6 +22,7 @@ namespace CognitiveServicesSample.Client.Droid
 
             base.OnCreate(bundle);
 
+            CachedImageRenderer.Init();
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(new AndroidInitializer()));
         }

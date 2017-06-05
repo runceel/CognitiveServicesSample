@@ -4,9 +4,10 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:Behaviors="clr-namespace:CognitiveServicesSample.Client.Behaviors"
              xmlns:Controls="clr-namespace:CognitiveServicesSample.Client.Controls"
+             xmlns:FFImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="CognitiveServicesSample.Client.Views.CategolizedImagePage"
-             Title="{Binding JaCategory, StringFormat='{0} images'}">
+             Title="{Binding JaCategory}">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <On Platform="iOS">0,20,0,0</On>
@@ -33,11 +34,12 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
-                            <Image Source="{Binding Image}"
-                                   Aspect="AspectFill"
-                                   Grid.RowSpan="2"
-                                   WidthRequest="50"
-                                   Margin="5" />
+                            <FFImageLoading:CachedImage Source="{Binding Image}"
+                                                        Aspect="AspectFit"
+                                                        DownsampleToViewSize="True"
+                                                        Grid.RowSpan="2"
+                                                        WidthRequest="50"
+                                                        Margin="5" />
 
                             <Label Text="{Binding Text}"
                                    Grid.Row="0"
@@ -65,21 +67,36 @@
                 <TapGestureRecognizer Tapped="PreviewClosed" />
             </Frame.GestureRecognizers>
             <Grid>
-                <Frame BackgroundColor="White" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="PreviewClosed" />
+                </Grid.GestureRecognizers>
+                <Frame BackgroundColor="White">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PreviewClosed" />
+                    </Frame.GestureRecognizers>
+                </Frame>
                 <Grid>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PreviewClosed" />
+                    </Grid.GestureRecognizers>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Label x:Name="labelJaDescription"
                            FontSize="Medium"
-                           TextColor="{StaticResource PrimaryColor}" 
+                           TextColor="{StaticResource PrimaryColor}"
                            HorizontalOptions="CenterAndExpand"
                            Grid.Row="0" />
-                    <Image x:Name="imagePreview"
-                           Aspect="AspectFill"
-                           HorizontalOptions="CenterAndExpand"
-                           Grid.Row="1" />
+                    <FFImageLoading:CachedImage x:Name="imagePreview"
+                                                Aspect="AspectFit"
+                                                HorizontalOptions="CenterAndExpand"
+                                                DownsampleToViewSize="True"
+                                                Grid.Row="1">
+                        <FFImageLoading:CachedImage.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="PreviewClosed" />
+                        </FFImageLoading:CachedImage.GestureRecognizers>
+                    </FFImageLoading:CachedImage>
                 </Grid>
             </Grid>
         </Frame>

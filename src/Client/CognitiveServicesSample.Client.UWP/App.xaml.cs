@@ -1,7 +1,10 @@
-﻿using System;
+﻿using FFImageLoading.Forms;
+using FFImageLoading.Forms.WinUWP;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -58,7 +61,12 @@ namespace CognitiveServicesSample.Client.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                Xamarin.Forms.Forms.Init(e);
+                CachedImageRenderer.Init();
+                Xamarin.Forms.Forms.Init(e, new[]
+                {
+                    typeof(CachedImage).GetTypeInfo().Assembly,
+                    typeof(CachedImageRenderer).GetTypeInfo().Assembly,
+                });
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

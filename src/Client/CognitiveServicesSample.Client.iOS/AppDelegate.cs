@@ -5,6 +5,7 @@ using Foundation;
 using UIKit;
 using Autofac;
 using Prism.Autofac.Forms;
+using FFImageLoading.Forms.Touch;
 
 namespace CognitiveServicesSample.Client.iOS
 {
@@ -23,6 +24,7 @@ namespace CognitiveServicesSample.Client.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            CachedImageRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));
 
