@@ -81,7 +81,7 @@ namespace CognitiveServicesSample.Client.ViewModels
             this.IsBusy = true;
             try
             {
-                var res = await this.CategoryService.LoadCategolizedImagesAsync(this.Category, this.Continuation);
+                var res = await this.CategoryService.LoadCategorizedImagesAsync(this.Category, this.Continuation);
                 this.Continuation = res.Continuation;
                 foreach (var r in res.CategorizedImages)
                 {

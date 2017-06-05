@@ -10,6 +10,6 @@ namespace CognitiveServicesSample.Client.Services
     public interface ICategoryService
     {
         Task<IEnumerable<Category>> GetCategoriesAsync();
-        Task<CategorizedImageResponse> LoadCategolizedImagesAsync(string category, string continuation);
+        Task<CategorizedImageResponse> LoadCategorizedImagesAsync(string category, string continuation);
     }
 }

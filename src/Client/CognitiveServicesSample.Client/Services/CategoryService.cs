@@ -26,9 +26,9 @@ namespace CognitiveServicesSample.Client.Services
             return JsonConvert.DeserializeObject<IEnumerable<Category>>(await res.Content.ReadAsStringAsync());
         }
 
-        public async Task<CategorizedImageResponse> LoadCategolizedImagesAsync(string category, string continuation)
+        public async Task<CategorizedImageResponse> LoadCategorizedImagesAsync(string category, string continuation)
         {
-            var res = await this.Client.GetAsync($"{Consts.ApiEndpoint}/api/CategolizedImage?category={Uri.EscapeDataString(category)}{this.CreateContinuationParameter(continuation)}");
+            var res = await this.Client.GetAsync($"{Consts.ApiEndpoint}/api/CategorizedImage?category={Uri.EscapeDataString(category)}{this.CreateContinuationParameter(continuation)}");
             res.EnsureSuccessStatusCode();
 
             return JsonConvert.DeserializeObject<CategorizedImageResponse>(await res.Content.ReadAsStringAsync());
