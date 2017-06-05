@@ -107,7 +107,7 @@ Cognitive Services による認識結果は Cosmos DB に以下の2つのコレ�
 
 ![UWP image](images/uwp1.png)
 
-一覧表示されたカテゴリをタップすると、そのカテゴリに分類された画像のリストが表示されます。画像と一緒に、その画像とともにされたツイートと、Cognitive Services で生成ｓれた画像の概要が表示されます。
+一覧表示されたカテゴリをタップすると、そのカテゴリに分類された画像のリストが表示されます。画像と一緒に、その画像とともにされたツイートと、Cognitive Services で生成された画像の概要が表示されます。
 
 ![UWP image](images/uwp2.png)
 
@@ -121,7 +121,7 @@ Cognitive Services による認識結果は Cosmos DB に以下の2つのコレ�
 
 ![Android image](images/android1.png)
 
-一覧表示されたカテゴリをタップすると、そのカテゴリに分類された画像のリストが表示されます。画像と一緒に、その画像とともにされたツイートと、Cognitive Services で生成ｓれた画像の概要が表示されます。
+一覧表示されたカテゴリをタップすると、そのカテゴリに分類された画像のリストが表示されます。画像と一緒に、その画像とともにされたツイートと、Cognitive Services で生成された画像の概要が表示されます。
 
 ![Android image](images/android2.png)
 
