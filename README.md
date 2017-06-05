@@ -9,6 +9,10 @@ Microsoft Cognitive Services を用いて Twitter 上の #microsoft ハッシュ
 
 画像のカテゴリ分けをした結果を閲覧するクライアントアプリケーションは Xamarin.Forms で MVVM フレームワークの Prism を使用して作成しています。
 
+## システムの概要
+
+![System](images/system.png)
+
 ## アプリケーションの画面
 
 ![UWP image](images/uwp.png)
