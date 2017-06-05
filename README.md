@@ -23,7 +23,7 @@ Microsoft Cognitive Services を用いて Twitter 上の #microsoft ハッシュ
 
 - Xamarin.Forms 2.5(preview)
 - Prism.Forms
-- FFIMageLoading
+- FFImageLoading
 
 ### 構造
 
