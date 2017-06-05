@@ -40,7 +40,7 @@ namespace CognitiveServicesSample.Client.ViewModels
         }
 
         public DelegateCommand LoadCategolizedImagesCommand { get; }
-        
+
 
         public CategolizedImagePageViewModel(ICategoryService categoryService,
             IPageDialogService pageDialogService)
@@ -73,17 +73,19 @@ namespace CognitiveServicesSample.Client.ViewModels
 
         private async Task LoadCategolizedImagesExecuteAsync()
         {
+            if (this.IsBusy || !this.IsMoreLoadCategolizedImages())
+            {
+                return;
+            }
+
             this.IsBusy = true;
             try
             {
-                if (this.IsLoadMore())
+                var res = await this.CategoryService.LoadCategolizedImagesAsync(this.Category, this.Continuation);
+                this.Continuation = res.Continuation;
+                foreach (var r in res.CategolizedImages)
                 {
-                    var res = await this.CategoryService.LoadCategolizedImagesAsync(this.Category, this.Continuation);
-                    this.Continuation = res.Continuation;
-                    foreach (var r in res.CategolizedImages)
-                    {
-                        this.CategolizedImages.Add(r);
-                    }
+                    this.CategolizedImages.Add(r);
                 }
             }
             catch (Exception ex)
@@ -97,7 +99,7 @@ namespace CognitiveServicesSample.Client.ViewModels
             }
         }
 
-        private bool IsLoadMore()
+        private bool IsMoreLoadCategolizedImages()
         {
             if (this.IsFirstLoadingRequest)
             {

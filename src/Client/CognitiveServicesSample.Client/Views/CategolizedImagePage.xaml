@@ -15,14 +15,15 @@
     <Grid>
         <Controls:IncrementalLoadingListView ItemsSource="{Binding CategolizedImages}"
                                              ItemTapped="ListView_ItemTapped"
-                                             LoadMoreCommand="{Binding LoadCategolizedImagesCommand}">
+                                             LoadMoreCommand="{Binding LoadCategolizedImagesCommand}"
+                                             HasUnevenRows="True">
             <ListView.Behaviors>
                 <Behaviors:NoSelectedListViewBehavior />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid Padding="5">
+                        <Grid Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -33,10 +34,9 @@
                             </Grid.ColumnDefinitions>
 
                             <Image Source="{Binding Image}"
-                                   Aspect="AspectFit"
+                                   Aspect="AspectFill"
                                    Grid.RowSpan="2"
                                    WidthRequest="50"
-                                   VerticalOptions="Center"
                                    Margin="5" />
 
                             <Label Text="{Binding Text}"
@@ -66,14 +66,21 @@
             </Frame.GestureRecognizers>
             <Grid>
                 <Frame BackgroundColor="White" />
-                <StackLayout HorizontalOptions="Center"
-                             VerticalOptions="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
                     <Label x:Name="labelJaDescription"
                            FontSize="Medium"
-                           TextColor="{StaticResource PrimaryColor}" />
+                           TextColor="{StaticResource PrimaryColor}" 
+                           HorizontalOptions="CenterAndExpand"
+                           Grid.Row="0" />
                     <Image x:Name="imagePreview"
-                           Aspect="AspectFit" />
-                </StackLayout>
+                           Aspect="AspectFill"
+                           HorizontalOptions="CenterAndExpand"
+                           Grid.Row="1" />
+                </Grid>
             </Grid>
         </Frame>
         <Frame IsVisible="{Binding IsBusy}"
