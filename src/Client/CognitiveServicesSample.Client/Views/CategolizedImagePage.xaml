@@ -64,40 +64,31 @@
                HorizontalOptions="FillAndExpand"
                VerticalOptions="FillAndExpand">
             <Frame.GestureRecognizers>
-                <TapGestureRecognizer Tapped="PreviewClosed" />
+                <TapGestureRecognizer Tapped="ClosePreview" />
             </Frame.GestureRecognizers>
-            <Grid>
+            <Grid Padding="15"
+                  BackgroundColor="White">
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="PreviewClosed" />
+                    <TapGestureRecognizer Tapped="ClosePreview" />
                 </Grid.GestureRecognizers>
-                <Frame BackgroundColor="White">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="PreviewClosed" />
-                    </Frame.GestureRecognizers>
-                </Frame>
-                <Grid>
-                    <Grid.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="PreviewClosed" />
-                    </Grid.GestureRecognizers>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Label x:Name="labelJaDescription"
-                           FontSize="Medium"
-                           TextColor="{StaticResource PrimaryColor}"
-                           HorizontalOptions="CenterAndExpand"
-                           Grid.Row="0" />
-                    <FFImageLoading:CachedImage x:Name="imagePreview"
-                                                Aspect="AspectFit"
-                                                HorizontalOptions="CenterAndExpand"
-                                                DownsampleToViewSize="True"
-                                                Grid.Row="1">
-                        <FFImageLoading:CachedImage.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="PreviewClosed" />
-                        </FFImageLoading:CachedImage.GestureRecognizers>
-                    </FFImageLoading:CachedImage>
-                </Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label x:Name="labelJaDescription"
+                       FontSize="Medium"
+                       TextColor="{StaticResource PrimaryColor}"
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Row="0" />
+                <FFImageLoading:CachedImage x:Name="imagePreview"
+                                            Aspect="AspectFit"
+                                            HorizontalOptions="CenterAndExpand"
+                                            DownsampleToViewSize="True"
+                                            Grid.Row="1">
+                    <FFImageLoading:CachedImage.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ClosePreview" />
+                    </FFImageLoading:CachedImage.GestureRecognizers>
+                </FFImageLoading:CachedImage>
             </Grid>
         </Frame>
         <Frame IsVisible="{Binding IsBusy}"

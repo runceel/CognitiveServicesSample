@@ -11,7 +11,7 @@ namespace CognitiveServicesSample.Client.Views
             InitializeComponent();
         }
 
-        private void PreviewClosed(object sender, EventArgs e)
+        private void ClosePreview(object sender, EventArgs e)
         {
             this.frameTappedCategolizedImageHost.IsVisible = false;
             this.imagePreview.Source = null;
