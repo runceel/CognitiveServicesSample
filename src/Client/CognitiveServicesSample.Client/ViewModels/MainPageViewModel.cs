@@ -90,7 +90,7 @@ namespace CognitiveServicesSample.Client.ViewModels
 
         private async Task TapCategoryExecuteAsync(Category category)
         {
-            await this.NavigationService.NavigateAsync("CategolizedImagePage",
+            await this.NavigationService.NavigateAsync("CategorizedImagePage",
                 new NavigationParameters
                 {
                     { "category", category.Name },

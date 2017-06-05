@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesSample.Client.ViewModels
 {
-    public class CategolizedImagePageViewModel : BindableBase, INavigationAware
+    public class CategorizedImagePageViewModel : BindableBase, INavigationAware
     {
         private ICategoryService CategoryService { get; }
         private IPageDialogService PageDialogService { get; }
@@ -42,7 +42,7 @@ namespace CognitiveServicesSample.Client.ViewModels
         public DelegateCommand LoadCategolizedImagesCommand { get; }
 
 
-        public CategolizedImagePageViewModel(ICategoryService categoryService,
+        public CategorizedImagePageViewModel(ICategoryService categoryService,
             IPageDialogService pageDialogService)
         {
             this.CategoryService = categoryService;

@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace CognitiveServicesSample.Client.Views
 {
-    public partial class CategolizedImagePage : ContentPage
+    public partial class CategorizedImagePage : ContentPage
     {
-        public CategolizedImagePage()
+        public CategorizedImagePage()
         {
             InitializeComponent();
         }
