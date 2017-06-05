@@ -20,7 +20,7 @@ namespace CognitiveServicesSample.Client.Views
 
         private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var categolizedImage = (CategolizedImage)e.Item;
+            var categolizedImage = (CategorizedImage)e.Item;
             this.imagePreview.Source = ImageSource.FromUri(new Uri(categolizedImage.Image));
             this.labelJaDescription.Text = categolizedImage.JaDescription;
             this.frameTappedCategolizedImageHost.IsVisible = true;

@@ -14,13 +14,13 @@ namespace CognitiveServiceSample.Jobs.Services
         private AnalyzeSetting AnalyzeSetting { get; }
         private ITwitterService TwitterService { get; }
         private IVisionService VisionService { get; }
-        private ICategolizedImageRepository CategolizedImageRepository { get; }
+        private ICategorizedImageRepository CategolizedImageRepository { get; }
         private ILogger Logger { get; }
 
         public AnalyzeService(IOptions<AnalyzeSetting> analyzeSetting,
             ITwitterService twitterService,
             IVisionService visionService,
-            ICategolizedImageRepository categolizedImageRepository,
+            ICategorizedImageRepository categolizedImageRepository,
             ILogger logger)
         {
             this.AnalyzeSetting = analyzeSetting.Value;

@@ -19,7 +19,7 @@ namespace CognitiveServicesSample.Client.ViewModels
         private IPageDialogService PageDialogService { get; }
         private string Category { get; set; }
         private string Continuation { get; set; }
-        public ObservableCollection<CategolizedImage> CategolizedImages { get; } = new ObservableCollection<CategolizedImage>();
+        public ObservableCollection<CategorizedImage> CategolizedImages { get; } = new ObservableCollection<CategorizedImage>();
 
         private bool IsFirstLoadingRequest { get; set; } = true;
 
@@ -83,7 +83,7 @@ namespace CognitiveServicesSample.Client.ViewModels
             {
                 var res = await this.CategoryService.LoadCategolizedImagesAsync(this.Category, this.Continuation);
                 this.Continuation = res.Continuation;
-                foreach (var r in res.CategolizedImages)
+                foreach (var r in res.CategorizedImages)
                 {
                     this.CategolizedImages.Add(r);
                 }

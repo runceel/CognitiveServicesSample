@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CognitiveServicesSample.Commons
 {
-    public class CategolizedImage
+    public class CategorizedImage
     {
         public string Id { get; set; }
         public long TweetId { get; set; }

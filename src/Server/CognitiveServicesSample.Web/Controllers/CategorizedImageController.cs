@@ -10,25 +10,25 @@ using System.Web.Http;
 
 namespace CognitiveServicesSample.Web.Controllers
 {
-    public class CategolizedImageController : ApiController
+    public class CategorizedImageController : ApiController
     {
-        private ICategolizedImageRepository CategolizedImageRepository { get; }
+        private ICategorizedImageRepository CategorizedImageRepository { get; }
         private ILogger Logger { get; }
 
-        public CategolizedImageController(ICategolizedImageRepository categolizedImageRepository, ILogger logger)
+        public CategorizedImageController(ICategorizedImageRepository categorizedImageRepository, ILogger logger)
         {
-            this.CategolizedImageRepository = categolizedImageRepository;
+            this.CategorizedImageRepository = categorizedImageRepository;
             this.Logger = logger;
         }
 
         public async Task<IHttpActionResult> Get(string category, string continuation = null)
         {
-            this.Logger.Info($"{nameof(CategolizedImageController)}.{nameof(Get)}({category}, {continuation})");
+            this.Logger.Info($"{nameof(CategorizedImageController)}.{nameof(Get)}({category}, {continuation})");
 
-            var r = await this.CategolizedImageRepository.LoadAsync(category, continuation);
-            return Ok(new Commons.CategolizedImageResponse
+            var r = await this.CategorizedImageRepository.LoadAsync(category, continuation);
+            return Ok(new Commons.CategorizedImageResponse
             {
-                CategolizedImages = r.Image.Select(x => new Commons.CategolizedImage
+                CategorizedImages = r.Image.Select(x => new Commons.CategorizedImage
                 {
                     Id = x.Id,
                     Category = x.Category,

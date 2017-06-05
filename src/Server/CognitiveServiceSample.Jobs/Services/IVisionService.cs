@@ -9,6 +9,6 @@ namespace CognitiveServiceSample.Jobs.Services
 {
     public interface IVisionService
     {
-        Task<IEnumerable<CategolizedImage>> CategolizedImageAsync(IEnumerable<TwitterSearchResult> tweets);
+        Task<IEnumerable<CategorizedImage>> CategolizedImageAsync(IEnumerable<TwitterSearchResult> tweets);
     }
 }

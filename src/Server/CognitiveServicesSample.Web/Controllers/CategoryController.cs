@@ -11,21 +11,21 @@ namespace CognitiveServicesSample.Web.Controllers
 {
     public class CategoryController : ApiController
     {
-        private ICategolizedImageRepository CategolizedImageRepository { get; }
+        private ICategorizedImageRepository CategorizedImageRepository { get; }
 
-        public CategoryController(ICategolizedImageRepository categolizedImageRepository)
+        public CategoryController(ICategorizedImageRepository categorizedImageRepository)
         {
-            this.CategolizedImageRepository = categolizedImageRepository;
+            this.CategorizedImageRepository = categorizedImageRepository;
         }
 
         public async Task<IHttpActionResult> Get()
         {
-            var categories = await this.CategolizedImageRepository.GetCategoriesAsync();
+            var categories = await this.CategorizedImageRepository.GetCategoriesAsync();
             var tasks = categories.Select(async x => new Commons.Category
             {
                 Name = x.Name,
                 JaName = x.JaName,
-                ImageCount = await this.CategolizedImageRepository.CountImageByCategoryAsync(x.Name),
+                ImageCount = await this.CategorizedImageRepository.CountImageByCategoryAsync(x.Name),
             })
             .ToArray();
             await Task.WhenAll(tasks);

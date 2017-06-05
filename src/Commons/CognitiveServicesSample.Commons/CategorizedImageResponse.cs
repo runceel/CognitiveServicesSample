@@ -4,9 +4,9 @@ using System.Text;
 
 namespace CognitiveServicesSample.Commons
 {
-    public class CategolizedImageResponse
+    public class CategorizedImageResponse
     {
-        public IEnumerable<CategolizedImage> CategolizedImages { get; set; }
+        public IEnumerable<CategorizedImage> CategorizedImages { get; set; }
         public string Continuation { get; set; }
     }
 }

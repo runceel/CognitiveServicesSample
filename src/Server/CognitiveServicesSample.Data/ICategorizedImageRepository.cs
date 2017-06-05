@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesSample.Data
 {
-    public interface ICategolizedImageRepository
+    public interface ICategorizedImageRepository
     {
-        Task<CategolizedImageLoadResponse> LoadAsync(string category, string continuation);
-        Task InsertAsync(CategolizedImage data);
+        Task<CategorizedImageLoadResponse> LoadAsync(string category, string continuation);
+        Task InsertAsync(CategorizedImage data);
         Task<IEnumerable<Category>> GetCategoriesAsync();
         Task<bool> IsExistTweet(long id);
         Task<int> CountImageByCategoryAsync(string category);

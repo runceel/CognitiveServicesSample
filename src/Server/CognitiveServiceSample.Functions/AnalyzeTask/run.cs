@@ -45,7 +45,7 @@ namespace CognitiveServiceSample.Functions
                 var translatorService = new TranslatorService(Options.Create(translatorSetting), logger);
                 var twitterService = new TwitterService(Options.Create(twitterSetting), logger);
                 var visionService = new VisionService(Options.Create(visionSetting), translatorService, logger);
-                var categolizedImageRepository = new CategolizedImageRepository(Options.Create(cosmosDbSetting), logger);
+                var categolizedImageRepository = new CategorizedImageRepository(Options.Create(cosmosDbSetting), logger);
                 var analyzeService = new AnalyzeService(Options.Create(analyzeSetting),
                     twitterService,
                     visionService,

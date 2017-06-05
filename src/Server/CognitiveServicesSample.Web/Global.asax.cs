@@ -26,7 +26,7 @@ namespace CognitiveServicesSample.Web
 
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             // register types
-            builder.RegisterType<CategolizedImageRepository>().As<ICategolizedImageRepository>().InstancePerRequest();
+            builder.RegisterType<CategorizedImageRepository>().As<ICategorizedImageRepository>().InstancePerRequest();
             builder.RegisterType<TraceLogger>().As<ILogger>().SingleInstance();
             builder.Register(c => Options.Create(new CosmosDbSetting
             {

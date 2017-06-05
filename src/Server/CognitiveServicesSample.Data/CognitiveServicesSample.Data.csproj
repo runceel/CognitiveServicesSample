@@ -40,12 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CategolizedImage.cs" />
-    <Compile Include="CategolizedImageLoadResponse.cs" />
-    <Compile Include="CategolizedImageRepository.cs" />
+    <Compile Include="CategorizedImage.cs" />
+    <Compile Include="CategorizedImageLoadResponse.cs" />
+    <Compile Include="CategorizedImageRepository.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CosmosDbSetting.cs" />
-    <Compile Include="ICategolizedImageRepository.cs" />
+    <Compile Include="ICategorizedImageRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

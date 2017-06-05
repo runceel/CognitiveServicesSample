@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CognitiveServicesSample.Data
 {
-    public class CategolizedImageLoadResponse
+    public class CategorizedImageLoadResponse
     {
-        public IEnumerable<CategolizedImage> Image { get; set; }
+        public IEnumerable<CategorizedImage> Image { get; set; }
         public string Continues { get; set; }
     }
 }

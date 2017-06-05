@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CognitiveServicesSample.Data
 {
-    public class CategolizedImage
+    public class CategorizedImage
     {
         [JsonProperty(PropertyName = "id")]
         public string Id { get; set; } = Guid.NewGuid().ToString();
