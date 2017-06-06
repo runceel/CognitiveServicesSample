@@ -130,3 +130,8 @@ Cognitive Services による認識結果は Cosmos DB に以下の2つのコレ�
 ![Android image](images/android3.png)
 
 
+# 関連記事
+
+このサンプルについてのBlog記事を書きました。
+
+- [Xamarin.Forms と Azure の組み合わせサンプル書いてみたよ](http://blog.okazuki.jp/entry/2017/06/05/180748)
